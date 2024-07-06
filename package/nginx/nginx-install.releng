@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: BSD-2-Clause
+# Copyright jdknight
+
+# copy over the built executable
+nginx_objs = releng_join(NGINX_BUILD_OUTPUT_DIR, 'objs')
+nginx_exe = releng_join(nginx_objs, 'nginx.exe')
+releng_copy_into(nginx_exe, TARGET_DIR)
+
+# include aseries of other resources typically found in a nginx package
+contrib_dir = releng_join(NGINX_BUILD_OUTPUT_DIR, 'contrib')
+target_contrib = releng_join(TARGET_DIR, 'contrib')
+releng_mkdir(target_contrib, critical=True)
+releng_copy_into(contrib_dir, target_contrib)
+
+conf_dir = releng_join(NGINX_BUILD_OUTPUT_DIR, 'conf')
+target_conf = releng_join(TARGET_DIR, 'conf')
+releng_mkdir(target_conf, critical=True)
+releng_copy_into(conf_dir, target_conf)
+
+docs_html_dir = releng_join(NGINX_BUILD_OUTPUT_DIR, 'docs', 'html')
+target_html = releng_join(TARGET_DIR, 'html')
+releng_mkdir(target_html, critical=True)
+releng_copy_into(docs_html_dir, target_html)
+
+# prepare interim folders expected for a nginx execution
+releng_mkdir(releng_join(TARGET_DIR, 'logs'), critical=True)
+releng_mkdir(releng_join(TARGET_DIR, 'temp'), critical=True)

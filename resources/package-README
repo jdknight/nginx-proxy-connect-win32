@@ -1,0 +1,12 @@
+# nginx-proxy-connect-win32
+
+This is an nginx Windows build which includes the proxy-connect module
+support.
+
+For documentation related to nginx:
+
+    https://nginx.org/
+
+For specifics on the proxy-connect modification:
+
+    https://github.com/chobits/ngx_http_proxy_connect_module

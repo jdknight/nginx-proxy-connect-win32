@@ -1,0 +1,13 @@
+# https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.bz2.sig
+# gpg: assuming signed data in 'pcre2-10.42.tar.bz2'
+# gpg: Signature made Mon Dec 12 12:12:03 2022 EST
+# gpg:                using RSA key 45F68D54BBE23FB3039B46E59766E084FB0F43D8
+# gpg: Good signature from "Philip Hazel <Philip.Hazel@gmail.com>" [unknown]
+# gpg:                 aka "Philip Hazel <ph10@hermes.cam.ac.uk>" [unknown]
+# gpg:                 aka "Philip Hazel <ph10@cam.ac.uk>" [unknown]
+# gpg:                 aka "Philip Hazel <ph10@cus.cam.ac.uk>" [unknown]
+# Primary key fingerprint: 45F6 8D54 BBE2 3FB3 039B  46E5 9766 E084 FB0F 43D8
+
+# locally computed
+sha512 72fbde87fecec3aa4b47225dd919ea1d55e97f2cbcf02aba26e5a0d3b1ffb58c25a80a9ef069eb99f9cf4e41ba9604ad06a7ec159870e1e875d86820e12256d3 libpcre2-10.42.tar.bz2
+sha512 af550d2b3deda372bd6d0ea78c877bda46f2a597d2960865854e07ffb30ab4ae78c768cf11b4ead72a0d890970192442fd5edb754ee54fcf3e633e9788b3cf6b LICENCE

@@ -1,0 +1,5 @@
+# releng-tool
+/cache/
+/dl/
+/output/
+.releng-flag-*

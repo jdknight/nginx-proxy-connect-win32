@@ -1,0 +1,13 @@
+diff -r a63c124e34bc auto/cc/msvc
+--- a/auto/cc/msvc	Tue May 28 17:26:54 2024 +0400
++++ b/auto/cc/msvc	Sat Jul 06 12:01:35 2024 -0400
+@@ -97,9 +97,6 @@
+ 
+ CFLAGS="$CFLAGS -W4"
+ 
+-# stop on warning
+-CFLAGS="$CFLAGS -WX"
+-
+ # disable logo
+ CFLAGS="$CFLAGS -nologo"
+ 

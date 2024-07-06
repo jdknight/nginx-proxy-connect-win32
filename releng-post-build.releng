@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: BSD-2-Clause
+# Copyright jdknight
+
+import shutil
+
+# copy over the proxy_connect sample nginx configuration
+verbose('copying sample-config...')
+
+resources_dir = releng_join(ROOT_DIR, 'resources')
+
+sample_cfg_fname = 'ngx_http_proxy_connect_module-nginx.conf'
+target_fname = 'nginx-proxy_connect.conf'
+sample_cfg = releng_join(resources_dir, sample_cfg_fname)
+target_nginx_conf = releng_join(TARGET_DIR, 'conf')
+target_cfg = releng_join(target_nginx_conf, target_fname)
+releng_copy(sample_cfg, target_cfg)
+
+pkg_readme_fname = 'package-README'
+target_fname = 'README'
+pkg_readme = releng_join(resources_dir, pkg_readme_fname)
+target_readme = releng_join(TARGET_DIR, target_fname)
+releng_copy(pkg_readme, target_readme)
+
+# copy over build information
+verbose('copying build information...')
+
+target_contrib = releng_join(TARGET_DIR, 'contrib')
+
+licenses_file = releng_join(OUTPUT_DIR, 'licenses', 'licenses')
+releng_copy_into(licenses_file, target_contrib)
+
+sbom_file = releng_join(OUTPUT_DIR, 'sbom.txt')
+releng_copy_into(sbom_file, target_contrib)
+
+# package the target directory into a zip to store in the images directory
+verbose('building artifact...')
+prefix = 'nginx-proxy-connect'
+fname = f'{prefix}-{NGINX_VERSION}-{NGX_HTTP_PROXY_CONNECT_MODULE_VERSION}'
+dst_archive = releng_join(IMAGES_DIR, fname)
+
+shutil.make_archive(dst_archive, 'zip', TARGET_DIR)

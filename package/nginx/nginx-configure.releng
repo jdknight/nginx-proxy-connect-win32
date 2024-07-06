@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: BSD-2-Clause
+# Copyright jdknight
+
+cmd = [
+    'bash',
+    'auto/configure',
+    # default/recommended options
+    # See: https://nginx.org/en/docs/howto_build_on_win32.html
+    '--with-cc=cl',
+    '--with-debug',
+    '--prefix=',
+    '--conf-path=conf/nginx.conf',
+    '--pid-path=logs/nginx.pid',
+    '--http-log-path=logs/access.log',
+    '--error-log-path=logs/error.log',
+    '--sbin-path=nginx.exe',
+    '--http-client-body-temp-path=temp/client_body_temp',
+    '--http-proxy-temp-path=temp/proxy_temp',
+    '--http-fastcgi-temp-path=temp/fastcgi_temp',
+    '--http-scgi-temp-path=temp/scgi_temp',
+    '--http-uwsgi-temp-path=temp/uwsgi_temp',
+    '--with-cc-opt=-DFD_SETSIZE=1024',
+    f'--with-pcre={LIBPCRE2_BUILD_DIR}',
+    f'--with-zlib={LIBZLIB_BUILD_DIR}',
+    f'--with-openssl={LIBOPENSSL_BUILD_DIR}',
+    '--with-openssl-opt=no-asm no-tests',
+    '--with-http_ssl_module',
+    # ngx-http-proxy-connect-module support
+    f'--add-module={NGX_HTTP_PROXY_CONNECT_MODULE_BUILD_DIR}',
+]
+
+releng_execute(cmd)

@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: BSD-2-Clause
+# Copyright jdknight
+
+packages = [
+    'nginx',
+]
+
+prerequisites = [
+    'bash',
+    'nmake',
+    'perl',
+    'sed',
+]

@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: BSD-2-Clause
+# Copyright jdknight
+
+LIBPCRE2_LICENSE = 'BSD-3-Clause'
+LIBPCRE2_LICENSE_FILES = 'LICENCE'
+LIBPCRE2_SITE = (
+    'https://github.com/PCRE2Project/pcre2/releases/download/'
+    'pcre2-${LIBPCRE2_VERSION}/'
+    'pcre2-${LIBPCRE2_VERSION}.tar.bz2'
+)
+LIBPCRE2_VERSION = '10.42'
