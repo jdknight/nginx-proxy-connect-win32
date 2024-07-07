@@ -1,0 +1,73 @@
+name: Release
+permissions: read-all
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build Release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Prepare releng-tool
+        run: pip install releng-tool
+
+      - name: Needed Perl modules
+        run: |
+          cpan Locale::Maketext::Simple
+
+      - name: Prepare Visual Studio Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # Remove WSL Bash from the system, as it causes trouble with
+      # a openssl build
+      - name: Remove WSL Bash
+        run: |
+          takeown /F "C:\Windows\System32\bash.exe"
+          icacls "C:\Windows\System32\bash.exe" /grant administrators:F
+          Remove-Item C:\Windows\System32\bash.exe
+
+      - name: Build release
+        run: releng-tool
+
+      - name: Generate hashes
+        run: |
+          cd output/images
+          sha256sum -b * >SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Store release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: output/images/
+
+  draft-release:
+    name: Prepare GitHub Draft Release
+    runs-on: ubuntu-latest
+    environment: release
+    needs:
+      - build
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Acquire release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+          path: artifacts/
+
+      - name: Prepare GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          gh release create --draft --verify-tag
+            '${{ github.ref_name }}' artifacts/**

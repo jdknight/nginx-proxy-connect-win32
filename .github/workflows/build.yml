@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Prepare releng-tool
+        run: pip install releng-tool
+
+      - name: Needed Perl modules
+        run: |
+          cpan Locale::Maketext::Simple
+
+      - name: Prepare Visual Studio Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # Remove WSL Bash from the system, as it causes trouble with
+      # a openssl build
+      - name: Remove WSL Bash
+        run: |
+          takeown /F "C:\Windows\System32\bash.exe"
+          icacls "C:\Windows\System32\bash.exe" /grant administrators:F
+          Remove-Item C:\Windows\System32\bash.exe
+
+      - name: Build release
+        run: releng-tool
