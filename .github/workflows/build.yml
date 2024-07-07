@@ -27,6 +27,15 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
 
+      - name: Cache downloads
+        uses: actions/cache@v4
+        id: cache-releng-tool
+        with:
+          path: |
+            cache
+            dl
+          key: releng-tool
+
       - name: Prepare releng-tool
         run: pip install releng-tool
 
