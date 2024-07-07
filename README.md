@@ -11,6 +11,7 @@ the [ngx_http_proxy_connect_module][ngx_http_proxy_connect_module] module.
 * [MSYS][msys] or [MSYS2][msys2]
 * [Mercurial][hg]
 * Perl (e.g. [ActivePerl][activeperl] or [Strawberry Perl][strawberryperl])
+* Perl Module "Locale::Maketext::Simple"
 * [releng-tool][releng-tool]
 
 ## Performing a build
